@@ -1,0 +1,76 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/task_completed_lay"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#e74c3c"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:visibility="gone"
+    tools:context=".FinishedpageActivity" >
+
+    <TextView
+        android:id="@+id/completed_task_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="TASK"
+        android:textColor="#ecf0f1"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/completed_task_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/completed_task_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="36dp"
+        android:text="Completed"
+        android:textColor="#ecf0f1"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/completed_task_days"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/completed_task_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="29dp"
+        android:text="14"
+        android:textColor="#ecf0f1"
+        android:textSize="130sp"
+        android:typeface="normal" />
+
+    <ImageView
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/completed_task_prompt"
+        android:layout_marginTop="70dp"
+        android:layout_toLeftOf="@+id/completed_task_prompt"
+        android:src="@drawable/weibo"
+        android:text="Button" />
+
+    <ImageView
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/button1"
+        android:layout_alignBottom="@+id/button1"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/renren"
+        android:text="Button" />
+
+    <ImageView
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/button2"
+        android:layout_toRightOf="@+id/completed_task_prompt"
+        android:src="@drawable/add"
+        android:text="Button" />
+
+</RelativeLayout>

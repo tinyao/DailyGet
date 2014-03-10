@@ -1,0 +1,11 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <color name="flat_blue_light">#4aa3df</color>
+    <color name="flat_blue_dark">#2980b9</color>
+    <color name="flat_bluegreen_light">#1abc9c</color>
+    <color name="flat_bluegreen_dark">#16a085</color>
+    <color name="flat_green_dark">#2ecc71</color>
+
+    <color name="white">#fff</color>
+    <color name="white_alpha">#aaffffff</color>
+</resources>
