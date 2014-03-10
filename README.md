@@ -1,0 +1,4 @@
+DailyGet
+========
+
+Get it everyday
