@@ -5,6 +5,8 @@
     <color name="flat_bluegreen_light">#1abc9c</color>
     <color name="flat_bluegreen_dark">#16a085</color>
     <color name="flat_green_dark">#2ecc71</color>
+    <color name="flat_white_light">#ECF0F1</color>
+    <color name="flat_white_dark">#BDC3C7</color>
 
     <color name="white">#fff</color>
     <color name="white_alpha">#aaffffff</color>

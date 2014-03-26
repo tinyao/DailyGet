@@ -8,14 +8,18 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import com.viewpagerindicator.IconPagerAdapter;
 import com.viewpagerindicator.TabIconPageIndicator;
+
+
+import android.util.Log;
 import android.view.Menu;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import im.ycz.dailyget.R;
-import im.ycz.dailyget.database.Prefs;
-import im.ycz.dailyget.database.TaskDBHelper;
-import im.ycz.dailyget.model.TaskItem;
+import im.ycz.dailyget.data.Prefs;
+import im.ycz.dailyget.data.TaskDBHelper;
+import im.ycz.dailyget.data.Task;
 
 public class MainActivity extends FragmentActivity {
 
@@ -35,7 +39,8 @@ public class MainActivity extends FragmentActivity {
         
         pager.setCurrentItem(1);
 
-        Prefs.goingTaskCount = TaskItem.getUncompletedCounts();
+        Prefs.goingTaskCount = Task.getUncompletedCounts();
+        Log.d("DEBUG", "ongoing: " + Prefs.goingTaskCount);
         
 //      generateData();
 
@@ -43,7 +48,7 @@ public class MainActivity extends FragmentActivity {
 
     private void generateData() {
 
-        TaskItem item0 = new TaskItem();
+        Task item0 = new Task();
         item0.title = "Take Exercise";
         item0.createTime = (Calendar.getInstance().getTimeInMillis() - 14*24*3600*1000);
         item0.isCompleted = true;
@@ -54,7 +59,7 @@ public class MainActivity extends FragmentActivity {
         item0.targetDays = 14;
         item0.save();
 
-        TaskItem item = new TaskItem();
+        Task item = new Task();
         item.title = "One-hour Reading";
         item.createTime = (Calendar.getInstance().getTimeInMillis() - 20*24*3600*1000);
         item.isCompleted = false;

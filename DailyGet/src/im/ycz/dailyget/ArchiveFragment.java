@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,23 +14,26 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.tjerkw.slideexpandable.library.SlideExpandableListAdapter;
+
 
 import java.util.ArrayList;
 
 import im.ycz.dailyget.R;
 import im.ycz.dailyget.adapter.TaskListAdapter;
-import im.ycz.dailyget.database.TaskDBHelper;
-import im.ycz.dailyget.model.TaskItem;
+import im.ycz.dailyget.data.TaskDBHelper;
+import im.ycz.dailyget.data.Task;
+import im.ycz.dailyget.utils.Logg;
 
 public final class ArchiveFragment extends Fragment {
     private static final String KEY_CONTENT = "ArchiveFragment:Content";
 
     private String mContent = "???";
     private ListView listView;
-    private ArrayList<TaskItem> allTasks;
+    private ArrayList<Task> allTasks;
     private TaskListAdapter adapter;
 
     private TextView rounds, completed, days;
@@ -54,8 +58,7 @@ public final class ArchiveFragment extends Fragment {
         completed = (TextView)contentView.findViewById(R.id.archive_completed);
         days = (TextView)contentView.findViewById(R.id.archive_days);
 
-        allTasks = (ArrayList<TaskItem>) TaskItem.listAll(TaskItem.class);
-//                = TaskDBHelper.getInstance(this.getActivity()).getAllTasks();
+        allTasks = (ArrayList<Task>) Task.listAll(Task.class);
         adapter = new TaskListAdapter(this.getActivity(), allTasks);
 
         listView.setAdapter(
@@ -69,7 +72,7 @@ public final class ArchiveFragment extends Fragment {
 
         rounds.setText(""+allTasks.size());
         int completedCounts = 0, daysCount = 0;
-        for(TaskItem item:allTasks){
+        for(Task item:allTasks){
             if (item.isCompleted) {
                 completedCounts++;
                 daysCount += item.targetDays;
@@ -133,22 +136,41 @@ public final class ArchiveFragment extends Fragment {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            if(intent.getAction().equals(ACTION_TASK_CREATED)) {
-                TaskItem item = (TaskItem)intent.getSerializableExtra("new_task");
+            
+        	if(intent.getAction().equals(ACTION_TASK_CREATED)) {
+        		
+                Task item = (Task) intent.getSerializableExtra("new_task");
                 allTasks.add(item);
                 adapter.notifyDataSetChanged();
             }
+            
             if(intent.getAction().equals(ACTION_TASK_DONE_TODAY)) {
-                int task_id = intent.getIntExtra("task_id", -1);
-                if(task_id==-1) return;
-                for(TaskItem item : allTasks){
-                    if(item.getId()==task_id){
+                long task_id = intent.getLongExtra("task_id", -1);
+                Log.d("DEBUG", "task_id: " + task_id);
+                if(task_id == -1) return;
+                for(Task item : allTasks){
+                	Log.d("DEBUG", "Long --- " + item.getId());
+                    if(item.getId().longValue() == task_id){
                         item.currentDays++;
+                        Logg.p("update archive days: " + item.currentDays);
                         adapter.notifyDataSetChanged();
+//                        updateView(item);
+//                        listView.invalidateViews();
+//                        listView.invalidate();
                     }
                 }
             }
 
         }
+        
+        private void updateView(Task task){
+        	int itemIndex = allTasks.indexOf(task);
+            int visiblePosition = listView.getFirstVisiblePosition();
+            View v = listView.getChildAt(itemIndex - visiblePosition);
+            // Do something fancy with your listitem view
+            RatingBar ratingBar = (RatingBar) v.findViewById(R.id.item_progress_bar);
+            ratingBar.setRating(task.currentDays);
+        }
     }
+    
 }

@@ -14,7 +14,7 @@ import android.os.Bundle;
 import java.io.IOException;
 
 import im.ycz.dailyget.R;
-import im.ycz.dailyget.model.TaskItem;
+import im.ycz.dailyget.data.Task;
 
 /**
  * Created by tinyao on 11/17/13.
@@ -28,10 +28,10 @@ public class EmptyWindows extends Activity {
         setContentView(R.layout.empty);
 
         Intent ii = getIntent();
-        TaskItem task = (TaskItem) ii.getSerializableExtra("task");
+        Task task = (Task) ii.getSerializableExtra("task");
 
         Uri alert = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
-        //����media player
+        // media player
         final MediaPlayer mMediaPlayer = new MediaPlayer();
         try
         {

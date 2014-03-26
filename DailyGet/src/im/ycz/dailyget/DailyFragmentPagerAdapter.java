@@ -17,7 +17,7 @@ public class DailyFragmentPagerAdapter extends FragmentPagerAdapter implements I
 
     private static final int[] TAB_ICONS = new int[] {
         R.drawable.tab_taskone_icon,
-        R.drawable.tab_archive_icon,
+        R.drawable.ic_action_storage,
         R.drawable.tab_tasktwo_icon,
     };
     

@@ -4,35 +4,10 @@
     android:layout_height="match_parent"
     android:background="@color/flat_blue_light" >
 
-    <RelativeLayout
-        android:id="@+id/flipview"
+    <im.ycz.dailyget.view.FlipLayout 
+        android:id="@+id/flip_lay"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-
-        <!-- back page -->
-
-        <include android:id="@+id/back"
-            android:visibility="gone"
-            layout="@layout/task_create"/>
-        
-        <!-- front page -->
-
-        <LinearLayout
-            android:id="@+id/front"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:orientation="vertical" >
-
-            <include layout="@layout/task_click_to_add"/>
-
-            <include layout="@layout/task_check_view"/>
-            
-        </LinearLayout>
-        
-    </RelativeLayout>
-
-    <include layout="@layout/task_completed_lay" />
-
+        android:layout_height="match_parent">
+    </im.ycz.dailyget.view.FlipLayout>
+    
 </RelativeLayout>

@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerInParent="true"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="20dp"
+        android:paddingTop="15dp" >
+
+        <EditText
+            android:id="@+id/task_create_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_edit_text"
+            android:fontFamily="sans-serif-light"
+            android:hint="@string/task_create_title_hint"
+            android:singleLine="true"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/white"
+            android:textColorHint="#bdc3c7"
+            android:textStyle="italic" />
+
+        <RelativeLayout
+            android:id="@+id/task_create_days_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:fontFamily="sans-serif-light"
+                android:text="@string/task_create_days_label"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/white" />
+
+            <RadioGroup
+                android:id="@+id/radio_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:checkedButton="@+id/days_21"
+                android:orientation="horizontal" >
+
+                <RadioButton
+                    android:id="@+id/days_7"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/days_radio_selector"
+                    android:button="@null"
+                    android:fontFamily="sans-serif-light"
+                    android:gravity="center"
+                    android:text="7"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/check_text_color"
+                    android:textStyle="italic" />
+
+                <RadioButton
+                    android:id="@+id/days_14"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/days_radio_selector"
+                    android:button="@null"
+                    android:fontFamily="sans-serif-light"
+                    android:gravity="center"
+                    android:text="14"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/check_text_color"
+                    android:textStyle="italic" />
+
+                <RadioButton
+                    android:id="@+id/days_21"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/days_radio_selector"
+                    android:button="@null"
+                    android:fontFamily="sans-serif-light"
+                    android:gravity="center"
+                    android:text="21"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/check_text_color"
+                    android:textStyle="italic" />
+            </RadioGroup>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/task_create_days_view"
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:fontFamily="sans-serif-light"
+                android:text="Start"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/white" />
+
+            <RadioGroup
+                android:id="@+id/radio_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:checkedButton="@+id/radio_start_today"
+                android:orientation="horizontal" >
+
+                <RadioButton
+                    android:id="@+id/radio_start_today"
+                    android:layout_width="80dp"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:layout_weight="1"
+                    android:background="@drawable/start_day_radio_left_selector"
+                    android:button="@null"
+                    android:fontFamily="sans-serif-light"
+                    android:gravity="center"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:text="Today"
+                    android:textColor="@color/check_text_color"
+                    android:textSize="15sp"
+                    android:textStyle="italic" />
+
+                <RadioButton
+                    android:id="@+id/radio_start_tomorrow"
+                    android:layout_width="83dp"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:layout_weight="1"
+                    android:background="@drawable/start_day_radio_right_selector"
+                    android:button="@null"
+                    android:fontFamily="sans-serif-light"
+                    android:gravity="center"
+                    android:text="Tomorrow"
+                    android:textColor="@color/check_text_color"
+                    android:textSize="15sp"
+                    android:textStyle="italic" />
+            </RadioGroup>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2px"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginTop="30dp"
+            android:background="#aabdc3c7" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical" >
+
+            <LinearLayout
+                android:id="@+id/alarm_lay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@drawable/time_pick_view_bg"
+                android:clickable="false"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingRight="8dp" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/alarm" />
+
+                <TextView
+                    android:id="@+id/tv_alarm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:focusable="false"
+                    android:fontFamily="sans-serif-light"
+                    android:text="@string/task_default_alarm_time"
+                    android:textColor="@color/white"
+                    android:textSize="21sp" />
+            </LinearLayout>
+
+            <Switch
+                android:id="@+id/switcher_alarm" 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:thumb="@drawable/switch_thumb"
+                android:track="@drawable/switch_bg_holo_light"
+                android:background="@drawable/bg_switch"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:fontFamily="sans-serif-condensed" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/btn_create_cancel"
+                android:layout_width="0.0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1.0"
+                android:background="@drawable/btn_flat_ok"
+                android:text="@string/task_create_cancel"
+                android:textColor="@color/flat_blue_light"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/btn_create_confirm"
+                android:layout_width="0.0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1.0"
+                android:background="@drawable/btn_flat_ok"
+                android:text="@string/task_create_confirm"
+                android:textColor="@color/flat_blue_light"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

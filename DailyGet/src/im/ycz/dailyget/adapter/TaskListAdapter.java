@@ -18,10 +18,13 @@ import android.widget.TimePicker;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Locale;
+
 
 import im.ycz.dailyget.R;
-import im.ycz.dailyget.database.TaskDBHelper;
-import im.ycz.dailyget.model.TaskItem;
+import im.ycz.dailyget.data.TaskDBHelper;
+import im.ycz.dailyget.data.Task;
+import im.ycz.dailyget.utils.Logg;
 import im.ycz.dailyget.utils.TimeUtils;
 
 /**
@@ -30,12 +33,11 @@ import im.ycz.dailyget.utils.TimeUtils;
 public class TaskListAdapter extends BaseAdapter {
 
     private LayoutInflater mInflater;
-    private ArrayList<TaskItem> tasks;
+    private ArrayList<Task> tasks;
     private Context context;
-//    private ShelfCoverDownloader coverLoader;
 
     public TaskListAdapter(Context context,
-                               ArrayList<TaskItem> list) {
+                               ArrayList<Task> list) {
         mInflater = LayoutInflater.from(context);
         this.tasks = list;
         this.context = context;
@@ -76,12 +78,13 @@ public class TaskListAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        final TaskItem task = tasks.get(position);
+        final Task task = tasks.get(position);
         holder.titleTv.setText(task.title);
         holder.daysTv.setText(task.currentDays + "/" + task.targetDays);
         holder.progressRatingBar.setNumStars(task.targetDays);
         holder.progressRatingBar.setMax(task.targetDays);
         holder.progressRatingBar.setRating(task.currentDays);
+//        holder.progressRatingBar.setProgress(task.currentDays);
 
         holder.alarmText.setText(task.alarmAt);
         holder.alarmSwitch.setChecked(task.isAlarm);
@@ -104,9 +107,15 @@ public class TaskListAdapter extends BaseAdapter {
                         Calendar cc = Calendar.getInstance();
                         cc.set(Calendar.HOUR_OF_DAY, hourOfDay);
                         cc.set(Calendar.MINUTE, minute);
-                        SimpleDateFormat ft = new SimpleDateFormat("HH:mm");
+                        SimpleDateFormat ft = new SimpleDateFormat("HH:mm", Locale.getDefault());
                         holder.alarmText.setText(ft.format(cc.getTime()));
-                        updateAlarm(task);
+                        // update alarm in task
+                        task.alarmAt = ft.format(cc.getTime());
+                        task.save();
+                        Logg.p("Dialog time set ...");
+                        
+                        if(task.isAlarm)
+                        	updateAlarm(task);	// update alarm Notification
                     }
 
                 }, hour, minute, DateFormat.is24HourFormat(context));
@@ -143,16 +152,13 @@ public class TaskListAdapter extends BaseAdapter {
         TextView daysTv;
     }
 
-    private void updateAlarm(TaskItem task) {
-        // strore alarm in database
-//        TaskDBHelper.getInstance(context).updateAlarm(task);
-        task.save();
-        
+    private void updateAlarm(Task task) {
         // cancel previous
         TimeUtils.cancelAlarm(context, task.getId());
         // set a new one
-        boolean isTomorrow = Long.valueOf(task.startTime) > Calendar.getInstance().getTimeInMillis();
-        TimeUtils.setNotiAlarm(context, task.alarmAt, isTomorrow, task.getId());
+        TimeUtils.setNotiAlarm(context, task);
+//        boolean isTomorrow = Long.valueOf(task.startTime) > Calendar.getInstance().getTimeInMillis();
+//        TimeUtils.updateNotiAlarm(context, task);
     }
 
 }

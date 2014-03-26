@@ -20,7 +20,7 @@ import java.io.IOException;
 import im.ycz.dailyget.EmptyWindows;
 import im.ycz.dailyget.MainActivity;
 import im.ycz.dailyget.R;
-import im.ycz.dailyget.model.TaskItem;
+import im.ycz.dailyget.data.Task;
 
 /**
  * Created by tinyao on 11/16/13.
@@ -37,12 +37,13 @@ public class AlarmReceiver extends BroadcastReceiver{
 
         mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
-
         if (intent.getAction().equals("ACTION_ALARM_USER")) {
             Log.d("DEBUG", "receiver_get");
-            TaskItem task = (TaskItem) intent.getSerializableExtra("task");
-            showNotification(task);
-            playAlarm(task);
+            Task task = (Task) intent.getSerializableExtra("task");
+            if(task != null) {
+            	showNotification(task);
+                playAlarm(task);
+            }
         }
 
         if (intent.getAction().equals("ACTION_CLEAR_GOT_IT")) {
@@ -50,7 +51,7 @@ public class AlarmReceiver extends BroadcastReceiver{
         }
     }
 
-    private void playAlarm(TaskItem taskItem) {
+    private void playAlarm(Task taskItem) {
         Intent in = new Intent(context, EmptyWindows.class);
         in.putExtra("task", taskItem);
         in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -64,8 +65,7 @@ public class AlarmReceiver extends BroadcastReceiver{
         mNotificationManager.cancel(NOTI_TASK);
     }
 
-    private void showNotification(TaskItem task){
-
+    private void showNotification(Task task){
 
         PendingIntent contentIntent = PendingIntent.getActivity(context, 0,
                 new Intent(context, MainActivity.class), PendingIntent.FLAG_UPDATE_CURRENT);
